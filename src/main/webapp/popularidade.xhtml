@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Popularidade</title>
+        <meta charset="utf-8" />
+        
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/popularidade.css" />
+        <script type="text/javascript" src="bootstrap/js/jquery-3.2.0.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+        
+    </h:head>
+    <h:body>
+        
+        <div id="content" class="container" style="padding-bottom: 50px">
+            
+            <h:form>
+                
+                
+                <div class="jumbotron container" style="margin-top: 1em">
+                    <div class="media col-md-10 col-md-offset-1">
+                        <div class="media-left media-middle">
+                            <div class="">
+                                <img class="media-object" src="#{popularidadeControler.result.userInfos().profile_image_url()}" style="width: 100px"/>
+                                <strong>@#{popularidadeControler.result.userInfos().screen_name()}</strong> 
+                                <small>#{popularidadeControler.result.userInfos().name()}</small>
+<!--                                <h5 class="media-heading">#{popularidadeControler.result.userInfos().name()}</h5>
+                                <small>@#{popularidadeControler.result.userInfos().screen_name()}</small>-->
+                            </div>
+                        </div>
+                        
+                        <div class="media-body resultado">
+                            <h3 class="text-center resultado">Sua popularidade é de: </h3>
+                            <div class="text-center">
+                                <h1 class="resultado"><h:outputText value="#{popularidadeControler.formattedPop}"/></h1>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <!--<p class="pull-right"><a class="btn btn-primary btn" href="#" role="button">Twittar resultado</a></p>-->
+                    <h:commandButton class="pull-right btn btn-info" value="Buscar Outro" action="#{popularidadeControler.buscarOutro()}"/> 
+                    
+                </div> 
+
+                <div class="text-center" style="text-shadow: 0.5px 1px 1px white;">
+                    <h3>Veja aqui os principais amigos e influências:</h3>
+                </div>
+                
+                
+                <div class="container clearfix ">
+                    <div class="media col-md-5 col-md-push-1"></div>
+                    <div class="media col-md-5 col-md-push-1"></div>
+                    <c:forEach items="#{popularidadeControler.result.influence()}" var="amigo" varStatus="a">
+                        
+                        <div class="media mediagroup col-md-5 col-md-push-1 col-sm-8 col-sm-offset-2 col-sm-push-2">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="#{amigo.userW().profile_image_url()}" style="width: 60px"/>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="col-md-8 col-sm-6">
+                                    <strong class="media-heading">${a.index+1}º lugar</strong>
+                                    <h5 class="media-heading">${amigo.userW().name()}</h5>
+                                    <smal>@${amigo.userW().screen_name()}</smal>
+                                </div>
+                                
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="text-center">
+                                        <small>Influência</small>
+                                        <h5><h:outputText value="#{popularidadeControler.getFormattedInfluence(amigo) }"/></h5>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </c:forEach>
+                </div>
+                
+                <!--<a href="/ativ2-auth-rest/ConsultaOutra">Consultar Outra Vez</a>-->
+
+
+            </h:form>
+
+        </div>
+        
+        
+    </h:body>
+</html>

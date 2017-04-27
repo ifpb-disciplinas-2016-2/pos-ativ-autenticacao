@@ -1,0 +1,30 @@
+version: '2'
+services:
+
+  web-cliente:
+    container_name: ativ2-auth-web
+    build: ./
+    image: natarajan/auth-web
+    ports:
+     - "8080:8080"
+     - "4949:4848"
+    links:
+     - "redis:redis-docker"
+  redis:
+    container_name: ativ2-auth-redis
+    image: natarajan/auth-redis
+    build: ./redis
+    ports:
+     - "6379:6379"
+    expose:
+     - 6379
+    volumes:
+     - redis-volume:/data
+
+networks:
+  default:
+    external:
+      name: cliente_default_ntw
+volumes:
+    redis-volume:
+      driver: local
