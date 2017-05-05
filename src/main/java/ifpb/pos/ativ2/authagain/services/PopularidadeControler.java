@@ -66,6 +66,12 @@ public class PopularidadeControler {
         return decimalFormat.format(valor * 100) + " %";
     }
     
+    /*
+        a fórmula da popularidade não indica se o resultado é normalizado. Escolhemos 
+        mostrar como uma porcentagem mas ela também pode ser entendidas como pontuação
+        com casas decimais. Portanto, aqui é o lugar onde pode ser realizada a mudança
+        para mostrar esse resultado .
+    */
     public String getFormattedPop(){
         return decimalFormat.format(this.result.pop()) + " %";
     }
